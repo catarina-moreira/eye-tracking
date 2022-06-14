@@ -1,57 +1,44 @@
 import os
 
-class MyGlobalVars:
+class GlobalVars:
 
-    FLAG = False # this flag is used to re-index the full dataset or not. Set it to False to load pre-indexed data
+    # class constructor
+    def __init__(self, isColab ):
+        # Data structure where all the information per patient will be stored
+        self.PATIENTS_DIC, self.IMG_TO_PATIENT, self.IMG_TO_DIAGNOSIS = {}, {}, {}
 
-    # path to github
-    GDRIVE_MAIN = os.path.join( "C:", "Users", "cmore", "GitHub", "eye-tracking", "")
+        # this flag is used to re-index the full dataset or not. Set it to False to load pre-indexed data
+        self.FLAG = False 
 
-    # MIMIC-XAMI full dataset path: update to your own dataset path
-    MIMIC_PATH = os.path.join("D", "GoogleDrive", "Datasets", "XAMI-MIMIC", "XAMI-MIMIC","")
+        # initialize other global variables
+        self.TOTAL_EYEGAZE, self.TOTAL_REFLACX, self.TOTAL_BOTH = 0, 0,0 
 
-    # EYE GAZE full dataset path
-    EYE_GAZE_PATH = os.path.join(GDRIVE_MAIN, "Datasets", "Eye-Gaze", "")
+        if not isColab:
+            # path to github
+            self.GDRIVE_MAIN = os.path.join( "C:", "Users", "cmore", "GitHub", "eye-tracking", "")
+            
+            # MIMIC-XAMI full dataset path: update to your own dataset path
+            self.MIMIC_PATH = os.path.join("D", "GoogleDrive", "Datasets", "XAMI-MIMIC", "XAMI-MIMIC","")
+        else:
+            self.GDRIVE_MAIN = "/content/drive/MyDrive/"
+            self.MIMIC_PATH = self.GDRIVE_MAIN + "Datasets/XAMI-MIMIC/XAMI-MIMIC/"
 
-    # Data structure where all the information per patient will be stored
-    PATIENTS_DIC = {}
+    # setters 
+    # increments the counter of patients who are in the EYE GAZE dataset
+    def increment_EYE_GAZE(self):
+        self.TOTAL_EYEGAZE = self.TOTAL_EYEGAZE + 1
+    
+    # increments the counter of patients who are in the REFLACX dataset
+    def increment_REFLACX(self):
+        self.TOTAL_REFLACX = self.TOTAL_REFLACX + 1
 
-    IMG_TO_PATIENT = {}
-    IMG_TO_DIAGNOSIS = {}
+    # increments the counter of the patients who are both in
+    # REFLACX and EYE GAZE datasets
+    def increment_BOTH(self):
+        self.TOTAL_BOTH = self.TOTAL_BOTH + 1
 
-    # initialize other global variables
-    TOTAL_EYEGAZE = 0
-    TOTAL_REFLACX = 0
-    TOTAL_BOTH = 0
-
-def setup_global_vars_Colab( ):
-    global TOTAL_EYEGAZE, TOTAL_REFLACX, TOTAL_BOTH, FLAG, PATIENTS_DIC, GDRIVE_MAIN, MIMIC_PATH, COLAB_MODE
-    global EYEGAZE_HEALTHY_CXR_HEATMAP_PATH, EYEGAZE_CHF_CXR_HEATMAP_PATH, EYEGAZE_PNEUMONIA_CXR_HEATMAP_PATH
-    global STATISTICS_EYEGAZE, EYE_GAZE_PATH, IMG_TO_PATIENT, IMG_TO_DIAGNOSIS
-
-    FLAG = False 
-    GDRIVE_MAIN = "/content/drive/MyDrive/"
-   
-    # MIMIC-XAMI full dataset path
-    MIMIC_PATH = os.path.join(GDRIVE_MAIN, "Datasets", "XAMI-MIMIC", "XAMI-MIMIC","")
-
-    # EYE GAZE full dataset path
-    EYE_GAZE_PATH = os.path.join(GDRIVE_MAIN, "Datasets", "Eye-Gaze", "")
-
-    # PYGAZE HEATMAPS PATHS
-    EYEGAZE_HEALTHY_CXR_HEATMAP_PATH = os.path.join(GDRIVE_MAIN, "Colab Notebooks", "Eye Tracking", "outputs", "pygaze", "eye_gaze_dataset", "healthy", "")
-    EYEGAZE_CHF_CXR_HEATMAP_PATH = os.path.join(GDRIVE_MAIN, "Colab Notebooks", "Eye Tracking", "outputs", "pygaze", "eye_gaze_dataset", "chf", "")
-    EYEGAZE_PNEUMONIA_CXR_HEATMAP_PATH = os.path.join(GDRIVE_MAIN, "Colab Notebooks", "Eye Tracking", "outputs", "pygaze", "eye_gaze_dataset", "pneumonia", "")
-
-    STATISTICS_EYEGAZE = os.path.join(GDRIVE_MAIN, "Colab Notebooks", "Eye Tracking", "outputs", "statistics", "eyegaze", "")
-    # Data structure where all the information per patient will be stored
-    PATIENTS_DIC = {}
-
-    IMG_TO_PATIENT = {}
-    IMG_TO_DIAGNOSIS = {}
-
-    # initialize other global variables
-    TOTAL_EYEGAZE = 0
-    TOTAL_REFLACX = 0
-    TOTAL_BOTH = 0
+    # updates the path to the MIMIC dataset
+    def updateMIMIC_PATH(self, new_path ):
+        self.MIMIC_PATH = new_path
+    
 

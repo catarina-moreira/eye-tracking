@@ -1,4 +1,4 @@
-
+define
 
 def get_global_disease( patient_Key, metadata ):
   chf = metadata['CHF'].values[0]
