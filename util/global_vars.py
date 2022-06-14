@@ -16,9 +16,10 @@ class GlobalVars:
         if not isColab:
             # path to github
             self.GDRIVE_MAIN = os.path.join( "C:", "Users", "cmore", "GitHub", "eye-tracking", "")
+            self.EYE_GAZE_PATH = os.path.join( "D:","GoogleDrive", "Datasets", "Eye-Gaze", "")
             
             # MIMIC-XAMI full dataset path: update to your own dataset path
-            self.MIMIC_PATH = os.path.join("D", "GoogleDrive", "Datasets", "XAMI-MIMIC", "XAMI-MIMIC","")
+            self.MIMIC_PATH = os.path.join("D:", "","GoogleDrive", "Datasets", "XAMI-MIMIC", "XAMI-MIMIC","")
         else:
             self.GDRIVE_MAIN = "/content/drive/MyDrive/"
             self.MIMIC_PATH = self.GDRIVE_MAIN + "Datasets/XAMI-MIMIC/XAMI-MIMIC/"
@@ -40,5 +41,37 @@ class GlobalVars:
     # updates the path to the MIMIC dataset
     def updateMIMIC_PATH(self, new_path ):
         self.MIMIC_PATH = new_path
+
+    # updates the path to GitHub
+    def updateGDrive(self, new_path ):
+        self.GDRIVE_MAIN = new_path
+
+    # returns the total number of patients in the EYE GAZE dataset
+    def getTOTAL_EYE_GAZE(self):
+        return self.TOTAL_EYEGAZE
+
+    # returns the total number of patients in the REFLACX dataset
+    def getTOTAL_REFLACX(self):
+        return self.TOTAL_REFLACX
+
+    # returns the total number of patients in both REFLACX and EYE GAZE
+    def getTOTAL_BOTH(self):
+        return self.TOTAL_BOTH
+
+    def getMIMIC_PATH(self):
+        return self.MIMIC_PATH
+    
+    def getGDRIVE_MAIN(self):
+        return self.GDRIVE_MAIN
+    
+    def getEYE_GAZE_PATH(self):
+        return self.EYE_GAZE_PATH
+
+    def getPATIENTS_DIC(self):
+        return self.PATIENTS_DIC
+
+    def insertPatientIntoPATIENTS_DIC(self, new_patient ):
+        self.PATIENTS_DIC[ new_patient.getPatient_key() ] = new_patient
+
     
 

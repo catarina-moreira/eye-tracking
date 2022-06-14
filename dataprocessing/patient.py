@@ -10,6 +10,34 @@ class Patient:
         self.patient_key = patient_key
         self.patient_data = patient_data
         self.patient_source = patient_source
+
+    # getters 
+    def getPatient_key(self):
+        return self.patient_key
     
+    def getPatient_data(self):
+        return self.patient_data
     
+    def getPatient_source(self):
+        return self.getPatient_source
+    
+    # setters
+    def setPatient_key(self, newKey ):
+        self.patient_key = newKey
+    
+    def setPatient_data(self, newData):
+        self.patient_data = newData
+    
+    def setPatient_source(self, newSource):
+        self.patient_source
+    
+
+
+    
+
+
+    
+
+    
+
 
