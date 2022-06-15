@@ -1,4 +1,5 @@
 import os
+from unittest.loader import VALID_MODULE_NAME
 
 class GlobalVars:
 
@@ -73,5 +74,17 @@ class GlobalVars:
     def insertPatientIntoPATIENTS_DIC(self, new_patient ):
         self.PATIENTS_DIC[ new_patient.getPatient_key() ] = new_patient
 
+    def insertDataIMG_TO_DIAGNOSIS(self, key, value ):
+        self.IMG_TO_DIAGNOSIS[key] = value
+
+    def insertDataIMG_TO_PATIENT(self, key, value ):
+        self.IMG_TO_PATIENT[key] = value
+
+    def getIMG_TO_DIAGNOSIS(self):
+        return self.IMG_TO_DIAGNOSIS
     
+    def getIMG_TO_PATIENT(self):
+        return self.IMG_TO_PATIENT
+
+
 

@@ -43,11 +43,8 @@ class MIMICDataProcessor:
     self.getKeyConditions_CheXpert( metadata, patient_data, indx, global_vars )
     # add full diagnosis
     self.getOverallDiagnosis(metadata, patient_data, indx, global_vars )
+
     
-
-
-
-
 
 
   def getOverallDiagnosis(self, metadata : pd.DataFrame, patient_data : dict, indx : int, global_vars : GlobalVars ):
@@ -59,6 +56,10 @@ class MIMICDataProcessor:
     if CHF == 1 : patient_data['DIAGNOSIS']['GLOBAL'] = "CHF"
     if pneumonia == 1 : patient_data['DIAGNOSIS']['GLOBAL'] = "Pneumonia"
     if normal == 1 : patient_data['DIAGNOSIS']['GLOBAL'] = "Normal"
+
+    global_vars.insertDataIMG_TO_DIAGNOSIS( patient_data['IMAGE_ID'],  patient_data['DIAGNOSIS']['GLOBAL'] )
+    global_vars.insertDataIMG_TO_PATIENT( patient_data['IMAGE_ID'],  patient_data['PATIENT_KEY'] )
+
 
   def getKeyConditions_CheXpert(self, metadata : pd.DataFrame, patient_data : dict, indx : int, global_vars : GlobalVars ):
     lst, lst_chexpert = [], []
@@ -110,8 +111,8 @@ class MIMICDataProcessor:
   def extractIdentifiersEYEGAZE(self, metadata, indx, token, global_vars ):
 
     patient_data = {} # dictionary that will hold patients data
-    patient_data['STUDY_ID'] = "s" + str( metadata.loc[indx,'study_id'])
-    patient_data['IMAGE_ID'] = "s" + str( metadata.loc[indx,'dicom_id'])
+    patient_data['STUDY_ID'] =   "s" + str( metadata.loc[indx,'study_id'])
+    patient_data['IMAGE_ID'] =   str( metadata.loc[indx,'dicom_id'])
     patient_data['PATIENT_ID'] = str( metadata.loc[indx,'patient_id'])
 
     # update the key of the patient if the patient has more than one medical study
@@ -122,23 +123,6 @@ class MIMICDataProcessor:
     
     return patient_data
   
-
-  
-
-    
-
-
-
-      
-
-
-
-
-
-      
-
-
-
 
 
     
