@@ -4,12 +4,12 @@ from unittest.loader import VALID_MODULE_NAME
 class GlobalVars:
 
     # class constructor
-    def __init__(self, isColab ):
+    def __init__(self, isColab, flag ):
         # Data structure where all the information per patient will be stored
         self.PATIENTS_DIC, self.IMG_TO_PATIENT, self.IMG_TO_DIAGNOSIS = {}, {}, {}
 
         # this flag is used to re-index the full dataset or not. Set it to False to load pre-indexed data
-        self.FLAG = False 
+        self.FLAG = flag 
 
         # initialize other global variables
         self.TOTAL_EYEGAZE, self.TOTAL_REFLACX, self.TOTAL_BOTH = 0, 0,0 
@@ -17,10 +17,11 @@ class GlobalVars:
         if not isColab:
             # path to github
             self.GDRIVE_MAIN = os.path.join( "C:", "Users", "cmore", "GitHub", "eye-tracking", "")
-            self.EYE_GAZE_PATH = os.path.join( "D:","GoogleDrive", "Datasets", "Eye-Gaze", "")
+            self.EYE_GAZE_PATH = os.path.join( "D:", "EYE-GAZE", "")
+            self.REFLACX_PATH = os.path.join("D:", "REFLACX", "" )
             
             # MIMIC-XAMI full dataset path: update to your own dataset path
-            self.MIMIC_PATH = os.path.join("D:", "","GoogleDrive", "Datasets", "XAMI-MIMIC", "XAMI-MIMIC","")
+            self.MIMIC_PATH = os.path.join("D:", "XAMI-MIMIC","")
         else:
             self.GDRIVE_MAIN = "/content/drive/MyDrive/"
             self.MIMIC_PATH = self.GDRIVE_MAIN + "Datasets/XAMI-MIMIC/XAMI-MIMIC/"
@@ -50,14 +51,23 @@ class GlobalVars:
     # returns the total number of patients in the EYE GAZE dataset
     def getTOTAL_EYE_GAZE(self):
         return self.TOTAL_EYEGAZE
+    
+    def setTOTAL_EYE_GAZE(self, value):
+        self.TOTAL_EYEGAZE = value
 
     # returns the total number of patients in the REFLACX dataset
     def getTOTAL_REFLACX(self):
         return self.TOTAL_REFLACX
+    
+    def setTOTAL_REFLACX(self, value):
+        self.TOTAL_REFLACX = value
 
     # returns the total number of patients in both REFLACX and EYE GAZE
     def getTOTAL_BOTH(self):
         return self.TOTAL_BOTH
+    
+    def setTOTAL_BOTH(self, value):
+        self.TOTAL_BOTH = value
 
     def getMIMIC_PATH(self):
         return self.MIMIC_PATH
@@ -70,6 +80,12 @@ class GlobalVars:
 
     def getPATIENTS_DIC(self):
         return self.PATIENTS_DIC
+    
+    def setPATIENTS_DIC(self, new_dict):
+        self.PATIENTS_DIC = new_dict
+    
+    def getFLAG(self):
+        return self.FLAG
 
     def insertPatientIntoPATIENTS_DIC(self, new_patient ):
         self.PATIENTS_DIC[ new_patient.getPatient_key() ] = new_patient
@@ -83,8 +99,18 @@ class GlobalVars:
     def getIMG_TO_DIAGNOSIS(self):
         return self.IMG_TO_DIAGNOSIS
     
+    def setIMG_TO_DIAGNOSIS(self, new_dict):
+        self.IMG_TO_DIAGNOSIS = new_dict
+    
     def getIMG_TO_PATIENT(self):
         return self.IMG_TO_PATIENT
+    
+    def setIMG_TO_PATIENT(self, new_dict):
+        self.IMG_TO_PATIENT = new_dict
+    
+    def getMIMICDictionaries(self):
+        return self.PATIENTS_DIC, self.IMG_TO_DIAGNOSIS, self.IMG_TO_PATIENT
+
 
 
 
