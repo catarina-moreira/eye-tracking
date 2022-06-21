@@ -19,7 +19,7 @@ class GlobalVars:
             self.GDRIVE_MAIN = os.path.join( "C:", "Users", "cmore", "GitHub", "eye-tracking", "")
             self.EYE_GAZE_PATH = os.path.join( "D:", "EYE-GAZE", "")
             self.REFLACX_PATH = os.path.join("D:", "REFLACX", "" )
-            
+            self.REFLACX_XAMI_METADATA = os.path.join("D:","", "XAMI-MIMIC", "speadsheets", "REFLACX", "metadata.csv" )
             # MIMIC-XAMI full dataset path: update to your own dataset path
             self.MIMIC_PATH = os.path.join("D:", "XAMI-MIMIC","")
         else:
@@ -47,6 +47,9 @@ class GlobalVars:
     # updates the path to GitHub
     def updateGDrive(self, new_path ):
         self.GDRIVE_MAIN = new_path
+
+    def getREFLACX_XAMI_METADATA(self):
+        return self.REFLACX_XAMI_METADATA
 
     # returns the total number of patients in the EYE GAZE dataset
     def getTOTAL_EYE_GAZE(self):
