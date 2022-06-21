@@ -1,5 +1,6 @@
-from dataprocessing.eyegaze import EyeGazeProcessor
+from dataprocessing.patient import Patient
 from util.global_vars import GlobalVars
+from dataprocessing.mimicdata import MIMICDataProcessor
 import pickle
 import os
 
@@ -21,8 +22,8 @@ def load_XAMI_MIMIC_Dictionaries( gv :GlobalVars ):
 
 def create_XAMI_MIMIC_Dictionaries(gv : GlobalVars):
     stats_dict = {}
-    process = EyeGazeProcessor( gv )
-    process.processEYE_GAZE( )
+    process = MIMICDataProcessor()
+    process.processEYE_GAZE( gv )
 
     # save processed patients
     save_dictionary( os.path.join(gv.getMIMIC_PATH(), "PATIENTS_DIC_EYEGAZE.pkl") , gv.getPATIENTS_DIC())
