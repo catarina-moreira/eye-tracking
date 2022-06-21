@@ -1,6 +1,6 @@
 from dataprocessing.patient import Patient
 from util.global_vars import GlobalVars
-from mimicdata import MIMICDataProcessor
+from dataprocessing.mimicdata import MIMICDataProcessor
 import pickle
 import os
 
